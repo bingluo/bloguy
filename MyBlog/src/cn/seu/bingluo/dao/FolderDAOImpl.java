@@ -1,6 +1,8 @@
 package cn.seu.bingluo.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
@@ -20,32 +22,39 @@ public class FolderDAOImpl extends SqlMapClientDaoSupport implements FolderDAO {
 	}
 
 	@Override
-	public long insertFolder(Folder folder) {
-		return (Long) getSqlMapClientTemplate().insert("FOLDERS.insertFolder",
-				folder);
+	public int insertFolder(Folder folder) {
+		return (Integer) getSqlMapClientTemplate().insert(
+				"FOLDERS.insertFolder", folder);
 	}
 
 	@Override
-	public void deleteFolderById(long id) {
-		getSqlMapClientTemplate().delete("FOLDERS.deleteFolderById", id);
+	public void deleteFolderByIdAndUser(int id, int userId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("folderId", id);
+		map.put("userId", userId);
+		getSqlMapClientTemplate()
+				.delete("FOLDERS.deleteFolderByIdAndUser", map);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<FolderPojo> selectAllFolders() {
+	public List<FolderPojo> selectAllFoldersByUserId(int userId) {
 		return getSqlMapClientTemplate().queryForList(
-				"FOLDERS.selectAllFolders");
+				"FOLDERS.selectAllFoldersByUserId", userId);
 	}
 
 	@Override
-	public FolderPojo selectFolderById(long folderId) {
+	public FolderPojo selectFolderById(int folderId) {
 		return (FolderPojo) getSqlMapClientTemplate().queryForObject(
 				"FOLDERS.selectFolderById", folderId);
 	}
 
 	@Override
-	public FolderPojo selectFolderByName(String name) {
+	public FolderPojo selectFolderByNameAndUserId(String folderName, int userId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("folderName", folderName);
+		map.put("userId", userId);
 		return (FolderPojo) getSqlMapClientTemplate().queryForObject(
-				"FOLDERS.selectFolderByName", name);
+				"FOLDERS.selectFolderByNameAndUserId", map);
 	}
 }

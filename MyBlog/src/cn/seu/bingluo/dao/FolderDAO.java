@@ -11,21 +11,21 @@ public interface FolderDAO {
 	 * 
 	 * @param folder
 	 */
-	long insertFolder(Folder folder);
+	int insertFolder(Folder folder);
 
 	/**
 	 * 删除文件夹
 	 * 
 	 * @param id
 	 */
-	void deleteFolderById(long id);
+	void deleteFolderByIdAndUser(int id, int userId);
 
 	/**
-	 * 获取所有归档
+	 * 获取用户所有归档
 	 * 
 	 * @return
 	 */
-	List<FolderPojo> selectAllFolders();
+	List<FolderPojo> selectAllFoldersByUserId(int userId);
 
 	/**
 	 * 根据归档ID获取归档
@@ -33,14 +33,14 @@ public interface FolderDAO {
 	 * @param folderId
 	 * @return
 	 */
-
-	FolderPojo selectFolderById(long folderId);
+	FolderPojo selectFolderById(int folderId);
 
 	/**
-	 * 根据分类名获取归档
+	 * 根据归档名、用户ID获取归档
 	 * 
-	 * @param name
+	 * @param folderName
+	 * @param userId
 	 * @return
 	 */
-	FolderPojo selectFolderByName(String name);
+	FolderPojo selectFolderByNameAndUserId(String folderName, int userId);
 }

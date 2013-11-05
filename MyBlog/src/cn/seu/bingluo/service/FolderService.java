@@ -14,16 +14,16 @@ public class FolderService {
 	@Autowired
 	private FolderDAOImpl folderDAOImpl;
 
-	public List<FolderPojo> getAllFolders() {
-		return folderDAOImpl.selectAllFolders();
+	public List<FolderPojo> getAllFolders(int userId) {
+		return folderDAOImpl.selectAllFoldersByUserId(userId);
 	}
 
-	public FolderPojo getFolderById(long folderId) {
+	public FolderPojo getFolderById(int folderId) {
 		return folderDAOImpl.selectFolderById(folderId);
 	}
 
-	public boolean isExistFolderName(String name) {
-		return folderDAOImpl.selectFolderByName(name) == null;
+	public boolean isExistFolderName(String folderName, int userId) {
+		return folderDAOImpl.selectFolderByNameAndUserId(folderName, userId) == null;
 	}
 
 	public long createFolder(Folder folder) {

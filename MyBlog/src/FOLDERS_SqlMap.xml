@@ -6,50 +6,52 @@
 	<typeAlias alias="folder" type="cn.seu.bingluo.entity.FolderPojo" />
 	<!-- 定义resultMap,将query结果映射为bean -->
 	<resultMap id="FolderResultMap" class="folder">
-		<result property="folderId" column="FOLDERID"/>
-		<result property="folderName" column="FOLDERNAME"/>
+		<result property="folderId" column="FOLDER_ID"/>
+		<result property="folderName" column="FOLDER_NAME"/>
+		<result property="folderUserId" column="FOLDER_USER_ID"/>
 		<result property="addTime" column="ADD_TIME"/>
 		<result property="blogCount" column="BLOG_COUNT"/>
 	</resultMap>
 
 	<insert id="insertFolder" parameterClass="folder">
 		<![CDATA[
-		INSERT INTO FOLDERS
-		folderName,ADD_TIME
-		VALUES (#folderName#,current_timestamp())
+		INSERT INTO folders
+		folder_name,folder_user_id,add_time
+		VALUES (#folderName#,#folderUserId#,current_timestamp())
 		]]>
-		<selectKey resultClass="long" keyProperty="FOLDERID">
+		<selectKey resultClass="int" keyProperty="FOLDER_ID">
 			select last_insert_id() as ID from FOLDERS limit 1
 		</selectKey>
 	</insert>
 
-	<delete id="deleteFolderById" parameterClass="long">
+	<delete id="deleteFolderByIdAndUser" parameterClass="java.util.Map">
 		<![CDATA[
-		DELETE FROM FOLDERS
-		WHERE folderId = #value#
+		DELETE FROM folders
+		WHERE folder_id = #folderId# AND folder_user_id = #userId#
 		]]>
 	</delete>
 
-	<select id="selectAllFolders" resultMap="FolderResultMap">
+	<select id="selectAllFoldersByUserId" resultMap="FolderResultMap" parameterClass="int">
 		<![CDATA[
-		SELECT folderId,folderName,ADD_TIME,BLOG_COUNT
-		FROM FOLDERS
+		SELECT folder_id,folder_name,folder_user_id,add_time,blog_count
+		FROM folders
+		WHERE folder_user_id = #value#
 		]]>
 	</select>
 
-	<select id="selectFolderById" resultMap="FolderResultMap" parameterClass="long">
+	<select id="selectFolderById" resultMap="FolderResultMap" parameterClass="int">
 		<![CDATA[
-		SELECT folderId,folderName,ADD_TIME,BLOG_COUNT
-		FROM FOLDERS
-		WHERE folderId = #value#
+		SELECT folder_id,folder_name,folder_user_id,add_time,blog_count
+		FROM folders
+		WHERE folder_id = #value#
 		]]>
 	</select>
 
-	<select id="selectFolderByName" resultMap="FolderResultMap" parameterClass="java.lang.String">
+	<select id="selectFolderByNameAndUserId" resultMap="FolderResultMap" parameterClass="java.util.map">
 		<![CDATA[
-		SELECT folderId,folderName,ADD_TIME,BLOG_COUNT
-		FROM FOLDERS
-		WHERE folderName = #value#
+		SELECT folder_id,folder_name,folder_user_id,add_time,blog_count
+		FROM folders
+		WHERE folder_name = #foldName# AND folder_user_id = #userId#
 		]]>
 	</select>
 </sqlMap>

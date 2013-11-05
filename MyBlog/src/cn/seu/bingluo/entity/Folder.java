@@ -4,9 +4,11 @@ import java.util.Date;
 
 public class Folder {
 	// 文件夹（归档）ID
-	private long folderId;
+	private int folderId;
 	// 文件夹名
 	private String folderName;
+	// 文件夹用户ID
+	private String folderUserId;
 	// 创建时间
 	private Date addTime;
 	// 该归档下文章数
@@ -15,7 +17,7 @@ public class Folder {
 	/**
 	 * @return the folderId
 	 */
-	public long getFolderId() {
+	public int getFolderId() {
 		return folderId;
 	}
 
@@ -23,7 +25,7 @@ public class Folder {
 	 * @param folderId
 	 *            the folderId to set
 	 */
-	public void setFolderId(long folderId) {
+	public void setFolderId(int folderId) {
 		this.folderId = folderId;
 	}
 
@@ -40,6 +42,21 @@ public class Folder {
 	 */
 	public void setFolderName(String folderName) {
 		this.folderName = folderName;
+	}
+
+	/**
+	 * @return the folderUserId
+	 */
+	public String getFolderUserId() {
+		return folderUserId;
+	}
+
+	/**
+	 * @param folderUserId
+	 *            the folderUserId to set
+	 */
+	public void setFolderUserId(String folderUserId) {
+		this.folderUserId = folderUserId;
 	}
 
 	/**

@@ -96,7 +96,7 @@ public class BlogController {
 		return "index";
 	}
 
-	@RequestMapping("/blogs.html")
+	@RequestMapping("/{user}/blogs.html")
 	public String blogList(BaseCommand command, Model model,
 			HttpServletRequest request) {
 		try {
