@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50523
 File Encoding         : 65001
 
-Date: 2013-11-06 00:32:18
+Date: 2013-11-06 01:15:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -89,18 +89,19 @@ INSERT INTO comments VALUES ('21', '1', '我操。。', '0', '6', '2012-11-23 14
 -- ----------------------------
 DROP TABLE IF EXISTS `folders`;
 CREATE TABLE `folders` (
-  `FOLDERID` int(11) NOT NULL AUTO_INCREMENT,
-  `FOLDERNAME` varchar(100) NOT NULL,
+  `FOLDER_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `FOLDER_NAME` varchar(100) NOT NULL,
+  `FOLDER_USER_ID` int(11) NOT NULL,
   `ADD_TIME` datetime NOT NULL,
   `BLOG_COUNT` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`FOLDERID`)
+  PRIMARY KEY (`FOLDER_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of folders
 -- ----------------------------
-INSERT INTO folders VALUES ('1', '未归档', '2012-11-01 11:42:38', '9');
-INSERT INTO folders VALUES ('2', '2012年归档', '2012-11-21 00:00:00', '2');
+INSERT INTO folders VALUES ('1', '未归档', '0', '2012-11-01 11:42:38', '9');
+INSERT INTO folders VALUES ('2', '2012年归档', '0', '2012-11-21 00:00:00', '2');
 
 -- ----------------------------
 -- Table structure for `tags`
