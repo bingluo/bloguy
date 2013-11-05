@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>冰冻小冰的个人博客</title>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="keywords" content="JAVA,C++,网络,编程,代码,博客,WEB,数据库" />
+<meta name="description" content="BingLuo's Blog 我的个人技术博客，编程技术分享！" />
+<meta name="robots" content="index, follow, archive" />
+<meta name="googlebot" content="index, follow, archive" />
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
+</head>
+<body>
+
+<!--header -->
+#parse("common/header.vm")
+<!--/header--><!-- content-outer -->
+<div id="content-wrap" class="clear" >
+    <!-- content -->
+    <div id="content">
+		<div id="navigation"><a href="/">首页</a> &raquo; <span>关于</span></div>
+        <!-- main -->
+	    <div id="main">
+            <h3>联系我</h3>
+            <form action="/postMsg.html" method="post" id="contactform">
+            	<p class="no-border"><strong>给我留言</strong></p>
+            	<p>
+            		<label for="subject">标题</label><br />
+            		<input id="subject" name="subject" type="text" tabindex="1" />
+            	</p>
+            	<p>
+            		<label for="name">尊姓大名</label><br />
+            		<input id="name" name="name" type="text" tabindex="2" />
+            	</p>
+            	<p>
+            		<label for="email">邮箱地址</label> （以便给您答复）<br />
+            		<input id="email" name="email" type="text" tabindex="3" />
+            	</p>
+            	<p>
+            		<label for="message">留言</label><br />
+            		<textarea id="message" name="message" rows="10" cols="20" tabindex="4"></textarea>
+            	</p>
+            	<p class="no-border">
+            		<input class="button" type="submit" value="提交" tabindex="5" />
+                   	<input class="button" type="reset" value="清空" tabindex="6" />
+            	</p>
+            </form>
+		</div>
+		<!-- /main -->
+		#parse("common/contactSiderBar.vm")
+	</div>
+    <!-- content -->
+</div>
+<!-- /content-out -->
+
+<!-- footer-bottom -->
+#parse("common/footer.vm")
+<!-- /footer-bottom-->
+
+</body>
+</html>

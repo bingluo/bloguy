@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+<title>冰冻小冰的个人博客</title>
+
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="keywords" content="JAVA,C++,网络,编程,代码,博客,WEB,数据库" />
+<meta name="description" content="BingLuo's Blog 我的个人技术博客，编程技术分享！" />
+<meta name="robots" content="index, follow, archive" />
+<meta name="googlebot" content="index, follow, archive" />
+
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
+<link type="text/css" rel="stylesheet" href="/static/css/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/static/css/shThemeDefault.css"/>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://localhost/action/xmlrpc/rsd-1" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://my.oschina.net/action/xmlrpc/wlwmanifest-1" />
+
+</head>
+
+<body>
+
+<!--header -->
+#parse("common/header.vm")
+<!--/header-->
+
+<!-- content-outer -->
+<div id="content-wrap" class="clear" >
+	<!-- content -->
+	<div id="content">
+		<div id="navigation"><a href="/">首页</a> &raquo; <a href="/blogs.html">博文</a> &raquo; <span>$blog.title</span></div>
+		<!-- main -->
+		<div id="main">
+			<div class="post">
+				<div class="right">
+                	<h2>$blog.title</h2><input id="blogId" type="hidden" value="$!{blog.blogId}"/>
+					#if($blog.tagList && $blog.tagList.size()>0)
+					<p class="post-info">标签:
+						#set($tags = $blog.tagList)
+						#set($index = 1)
+						#foreach($tag in $tags)
+						<a href="/tag-blog/$!{tag.tagId}.html">$!{tag.tagName}</a>#if($index<$tags.size()),#end
+						#set($index = $index+1)
+						#end
+					</p>
+					#end
+					<!--
+    				<div class="image-section">
+    					<img src="/static/images/img-post.jpg" alt="image post" height="200" width="500"/>
+    				</div>
+					-->
+    				<p>
+						$blog.content
+    				</p>
+					<!-- JiaThis Button BEGIN -->
+					<div class="jiathis_style_32x32 share-box clear">
+						<h4>分享到</h4>
+						<a class="jiathis_button_tsina"></a>
+						<a class="jiathis_button_tqq"></a>
+                        <a class="jiathis_button_renren"></a>
+                        <a class="jiathis_button_douban"></a>
+                        <a class="jiathis_button_t163"></a>
+                        <a class="jiathis_button_tsohu"></a>
+                        <a class="jiathis_button_qzone"></a>
+                        <a class="jiathis_button_kaixin001"></a>
+                        <a href="http://www.jiathis.com/share?uid=1713321" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+						<a class="jiathis_counter_style"></a>
+					</div>
+					<!-- JiaThis Button END -->
+				</div>
+				<div class="left">
+					#parse("/common/blogBaseLeft.vm")
+					#if($blog.tagList && $blog.tagList.size()>0)
+					<div class="post-meta">
+						<h4>标签</h4>
+						<ul class="tags">
+    						#set($tags = $blog.tagList)
+    						#set($index = 1)
+    						#foreach($tag in $tags)
+							<li><a href="/tag-blog/$!{tag.tagId}.html" rel="tag">$!{tag.tagName}</a></li>
+    						#set($index = $index+1)
+    						#end
+						</ul>
+					</div>
+					#end
+				</div>
+			</div>
+			<!-- 评论 -->
+			<div class="post-bottom-section">
+				<h4>共 $!blog.commentCount 条评论</h4>
+				<div class="right">
+					<ol class="commentlist">
+						$!comments
+					</ol>
+				</div>
+			</div>
+			<!-- /评论 -->
+
+			<!-- 回复表单 -->
+            <div class="post-bottom-section">
+				<h4>回复</h4><a name="replyForm"></a>
+                <div class="right">
+                	<form id="replyForm" action="/postReply" method="post" id="commentform">
+						<input id="toId" name="toId" type="hidden" value="$!blog.blogId"/>
+						<input id="toType" name="toType" type="hidden" value="0"/>
+						<input id="blogId" name="blogId" type="hidden" value="$!blog.blogId"/>
+    					<p>
+    						<label id="msgLabel" for="content">内容</label><br />
+    						<textarea id="message" name="content" rows="10" cols="20" tabindex="2"></textarea>
+    					</p>
+    					<p class="no-border">
+    						<input class="button" type="submit" value="发表评论" tabindex="3" />
+    					</p>
+                   </form>
+                </div>
+			</div>
+			<!-- /回复表单 -->
+		</div>
+		<!-- /main -->
+
+		<!-- sidebar -->
+		#parse("common/siderBar.vm")
+		<!-- /sidebar -->
+	</div>
+    <!-- content -->
+</div>
+<!-- /content-out -->
+
+<!-- footer-bottom -->
+#parse("common/footer.vm")
+<!-- /footer-bottom-->
+
+<script type="text/javascript" src="/static/js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="/static/js/reply.js"></script>
+<script type="text/javascript" src="/static/js/brush.js"></script>
+<script type="text/javascript" >
+	var jiathis_config={
+		data_track_clickback:true,
+		url:location.href,
+		summary:"${}",
+		title:"${blog.title}",
+		hideMore:false
+	}
+	$(document).ready(function(){
+		SyntaxHighlighter.config.clipboardSwf = '/static/swf/clipboard.swf';
+		SyntaxHighlighter.all();
+	});
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1713321" charset="utf-8"></script>
+</body>
+</html>

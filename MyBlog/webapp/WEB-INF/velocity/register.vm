@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+<title>冰冻小冰的个人博客</title>
+
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="keywords" content="JAVA,C++,网络,编程,代码,博客,WEB,数据库" />
+<meta name="description" content="BingLuo's Blog 我的个人技术博客，编程技术分享！" />
+<meta name="robots" content="index, follow, archive" />
+<meta name="googlebot" content="index, follow, archive" />
+
+<script type="text/javascript" src="/static/js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="/static/js/jquery.form-3.20.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
+<script type="text/javascript">
+$(document).ready(function() {
+    var options = {
+        beforeSubmit:  validate,
+        success:       showResponse
+    };
+    $('#regForm').ajaxForm(options);
+});
+
+function validate(formData, jqForm, options) {
+	if($("#username").val()==""){
+		alert("请输入用户名");
+		return false;
+	}else if($("#password").val()==""){
+		alert("请输入登录密码");
+		return false;
+	}else if($("#password").val()!=$("#password2").val()){
+		alert("请输入相同的密码");
+		return false;
+	}else if($("#email").val()==""){
+		alert("请输入邮箱");
+		return false;
+	}else if($("#verifyCode").val()==""){
+		alert("请输入验证码");
+		return false;
+	}
+	return true;
+}
+
+function showResponse(html)  {
+	if(html=="success"){
+		location.href="/";
+	}else{
+		alert(html);
+	}
+}
+</script>
+<style>
+	form{
+	   height:550px;
+       width: 800px;
+	   font-size:14px;
+       margin: 20px auto 40px auto;
+       padding: 0 0 20px 0;
+       background: #fff;
+       overflow: hidden;
+	   border:2px solid rgba(20, 125, 182, 0.42);
+       -moz-border-radius: 10px;
+       -webkit-border-radius: 10px;
+       border-radius: 10px;
+	   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	}
+
+	table{
+		margin-left:40px;
+		margin-top:120px;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+		background: rgba(20, 125, 182, 0.24);
+	}
+	table,tr,td{
+		border:0px;
+	}
+	td{
+		height:10px;
+		padding:2px;
+	}
+	td.th{
+		text-align:right;
+	}
+	form .myBtn{
+    	margin-top: 20px;
+    	margin-right: 10px;
+    	padding: 8px 8px;
+		color:#fff;
+		font-weight:bold;
+		border:1px solid #2177A5;
+		background:#227BAD;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
+		border-radius: 4px;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	}
+	form .myBtn:hover{
+		background-color:#F39;
+		border:1px solid #FF2B95;
+	}
+	#verifyImg{
+		clear:both;
+		padding:0;
+		border:0px;
+		background:#fff;
+	}
+</style>
+</head>
+
+<body>
+
+<!--header -->
+#parse("common/header.vm")
+<!--/header-->
+
+<!-- content-outer -->
+<div id="content-wrap" class="clear" >
+	<!-- content -->
+    <form id="regForm" action="/register" method="POST" >
+		<table>
+        	<tr>
+        		<td class="th">用户名：</td>
+        		<td><input type="text" id="username" name="username" style="width:200px"/></td>
+        	</tr>
+        	<tr>
+        		<td class="th">登录密码：</td>
+        		<td><input type="text" id="password" name="password" style="width:200px"/></td>
+        	</tr>
+        	<tr>
+        		<td class="th">确认密码：</td>
+        		<td><input type="text" id="password2" name="password2" style="width:200px"/></td>
+        	</tr>
+        	<tr>
+        		<td class="th">邮箱：</td>
+    			<td><input type="text" id="email" name="email" style="width:200px"/></td>
+        	</tr>
+        	<tr>
+        		<td class="th">验证码：</td>
+    			<td><input type="text" id="verifyCode" name="verifyCode" style="width:70px"/><img id="verifyImg" src="#"/><a href="#">看不清？</a></td>
+        	</tr>
+        	<tr>
+        		<td class="th"></td>
+    			<td>
+            		<input type='submit' class="myBtn" value='注册新用户'/>
+    			</td>
+        	</tr>
+		</table>
+	</form>
+    <!-- content -->
+</div>
+<!-- /content-out -->
+
+<!-- footer-bottom -->
+#parse("common/footer.vm")
+<!-- /footer-bottom-->
+
+</body>
+</html>

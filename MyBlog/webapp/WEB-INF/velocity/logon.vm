@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+<title>冰冻小冰的个人博客</title>
+
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="keywords" content="JAVA,C++,网络,编程,代码,博客,WEB,数据库" />
+<meta name="description" content="BingLuo's Blog 我的个人技术博客，编程技术分享！" />
+<meta name="robots" content="index, follow, archive" />
+<meta name="googlebot" content="index, follow, archive" />
+
+<script type="text/javascript" src="/static/js/jquery-1.8.3.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
+<style>
+	form{
+	   height:350px;
+       width: 800px;
+	   font-size:14px;
+       margin: 20px auto 40px auto;
+       padding: 0 0 20px 0;
+       background: #fff;
+       overflow: hidden;
+	   border:2px solid rgba(20, 125, 182, 0.42);
+       -moz-border-radius: 10px;
+       -webkit-border-radius: 10px;
+       border-radius: 10px;
+	   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	}
+
+	table{
+		margin-left:50px;
+		margin-top:120px;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+		background: rgba(20, 125, 182, 0.24);
+	}
+	table,tr,td{
+		border:0px;
+	}
+	td{
+		height:10px;
+		padding:2px;
+	}
+	td.th{
+		text-align:right;
+	}
+	form .myBtn{
+    	margin-top: 20px;
+    	margin-right: 10px;
+    	padding: 6px 8px;
+		color:#fff;
+		font-weight:bold;
+		border:1px solid #2177A5;
+		background:#227BAD;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
+		border-radius: 4px;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	}
+	form .myBtn:hover{
+		background-color:#F39;
+		border:1px solid #FF2B95;
+	}
+</style>
+</head>
+
+<body>
+
+<!--header -->
+#parse("common/header.vm")
+<!--/header-->
+
+<!-- content-outer -->
+<div id="content-wrap" class="clear" >
+	<!-- content -->
+    <form action="/logon" method="POST">
+		<table>
+        	<tr>
+        		<td class="th">邮箱：</td>
+    			<td><input type="text" name="username" style="width:200px"/></td>
+        	</tr>
+        	<tr>
+        		<td class="th">密码：</td>
+        		<td><input type="text" name="password" style="width:200px"/></td>
+        	</tr>
+        	<tr>
+        		<td class="th"></td>
+        		<td><input type='checkbox' name='save_login' value='1'/> 自动登录</td>
+        	</tr>
+        	<tr>
+        		<td class="th"></td>
+    			<td>
+            		<input type='submit' class="myBtn" value='现在登录'/>&nbsp;&nbsp;&nbsp;&nbsp;
+        			<a href="/reset-pwd">忘记密码</a>
+    			</td>
+        	</tr>
+		</table>
+	</form>
+    <!-- content -->
+</div>
+<!-- /content-out -->
+
+<!-- footer-bottom -->
+#parse("common/footer.vm")
+<!-- /footer-bottom-->
+
+</body>
+</html>

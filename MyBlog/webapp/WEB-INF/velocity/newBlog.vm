@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>冰冻小冰的个人博客</title>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="keywords" content="JAVA,C++,网络,编程,代码,博客,WEB,数据库" />
+<meta name="description" content="BingLuo's Blog 我的个人技术博客，编程技术分享！" />
+<meta name="robots" content="index, follow, archive" />
+<meta name="googlebot" content="index, follow, archive" />
+<script type="text/javascript" charset="utf-8" src="/static/js/jquery-1.8.3.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/js/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/js/kindeditor/zh_CN.js"></script>
+<script type="text/javascript" charset="utf-8" src="/static/js/brush.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
+<link type="text/css" rel="stylesheet" href="/static/css/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/static/css/shThemeDefault.css"/>
+<style>
+	.ke-icon-incode {
+		background-image: url(/static/js/kindeditor/themes/default/default.gif);
+		background-position: 0px -960px;
+		width: 16px;
+		height: 16px;
+	}
+	.ke-dialog-content{
+    	font-size: 10pt;
+    	background-color: #f0f0ee;
+    }
+	.ke-dialog-body table{
+		padding:20px;
+    }
+</style>	<style>
+	.formHead{
+		padding-bottom:20px;
+	}
+	.formHead span{
+		font:bold 30px  Arial;
+		color:#333;
+		text-shadow:1px 1px 0 #B1B1B1;
+	}
+	.formHead span a{
+		margin-left:30px;
+		font-size:16px;
+	}
+
+	span .myA{
+		text-shadow:1px 1px 0 #B1B1B1;
+		color:#0D6684;
+		font-weight:bold;
+	}
+
+	span .myA:hover{
+		color:#000;
+	}
+	form{
+    	margin:0 0 50px 0;
+		padding:11px 11px 30px 11px;
+        background: #F3F4F5;
+        border: 1px solid #E2E4E7;
+      	-moz-border-radius: 8px;
+		-webkit-border-radius: 8px;
+		border-radius: 8px;
+		width:695px;
+	}
+	form .formSectionA{
+		padding-bottom:2px;
+		margin-right:0px;
+		margin-bottom:15px;
+	}
+	#titleLabel{
+		font-size:14px;
+	}
+	#title{
+		width:350px;
+	}
+	#folderLabel{
+		font-size:14px;
+	}
+	#folder{
+		width:110px;
+	}
+	#manageFolder{
+		font-size:14px;
+		padding-right:20px;
+	}
+	#setTop{
+		font-size:16px;
+	}
+	#tags{
+		width:300px;
+	}
+	#contentArea{
+		width:715px;
+		height:400px;
+		visibility:hidden;
+	}
+	.tips{
+		margin-left:10px;
+		color:#234566;
+	}
+	form input.myBtn{
+    	margin-top: 20px;
+    	margin-right: 10px;
+    	padding: 6px 8px;
+		color:#fff;
+		font-weight:bold;
+		border:1px solid #2177A5;
+		background:#227BAD;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
+		border-radius: 4px;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+	}
+	form input.myBtn:hover{
+		background-color:#F39;
+		border:1px solid #FF2B95;
+	}
+	input,select,textarea{
+      	-moz-border-radius: 4px;
+    	-webkit-border-radius: 4px;
+    	border-radius: 4px;
+	}
+	#contentLabel{
+		font-size:14px
+	}
+	#tagLabel{
+		font-size:14px
+	}
+	#postBtn{
+		margin-left:20px;
+	}
+	</style>
+<script type='text/javascript'>
+$(document).ready(function(){
+	SyntaxHighlighter.config.clipboardSwf = '/static/swf/clipboard.swf';
+	SyntaxHighlighter.all();
+});
+</script>
+<script type="text/javascript" charset="utf-8" src="/static/js/kindeditor/plugins/incode.js"></script>
+
+<script type="text/javascript">
+	var editor;
+	KindEditor.ready(function(K) {
+    editor = K.create('#contentArea', {
+		width:695,
+		resizeType : 2,
+		shadowMode : false,
+		allowPreviewEmoticons : false,
+		allowImageUpload : true,
+		allowFlashUpload : false,
+		uploadJson : '/action/blog/post',
+		cssPath : '/static/js/kindeditor/ke.css',
+		afterChange : function() {
+			this.sync();
+		},
+		items : ['undo', 'redo', '|', 'cut', 'copy', 'paste', 'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull',
+				 'insertorderedlist', 'insertunorderedlist', 'indent', ,'outdent', 'subscript', 'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen',
+				 '/','bold', 'italic', 'underline', 'strikethrough', 'removeformat', '|', 'formatblock', 'forecolor',
+				 'hilitecolor', 'fontname', 'fontsize', '|', 'emoticons', 'incode', 'image', 'flash', 'table', 'quote', 'link', 'unlink', '|', 'source', 'about']
+    });
+});
+
+</script>
+</head>
+
+<body>
+<!--header -->
+#parse("common/header.vm")
+<!--/header--><!-- content-outer -->
+<div id="content-wrap" class="clear" >
+	<!-- content -->
+	<div id="content">
+   	<!-- main -->
+		<div id="main">
+			<div class="formHead">
+				<span>发表博文</span>
+				<span><a class="myA" style="" href="#">推荐用Live Writer写博客，轻松发布丰富的内容&raquo;</a></span>
+			</div>
+        	<form method="post" action="/action/blog/post">
+				<div class="formSectionA">
+    				<label id="titleLabel">标题</label><br/>
+    				<input id="title" type="text" name="title"/>
+    				<label id="folderLabel" for="folder"> 收录到 </label>
+    				<select id="folder" name="folder">
+    					<option value="JAVA">JAVA</option>
+    					<option value="WEB">WEB</option>
+    					<option value="C++">C++</option>
+    					<option value="数据库">数据库</option>
+    				</select> <span id="manageFolder"><a href="#" class="myA">管理分类&raquo;</a></span>
+    				<input type="checkbox" name="toTop"/> <span id="setTop">置顶</span>
+				</div>
+				<label id="contentLabel">内容 </label> <span class="tips"> Enter分段(&lt;p/&gt;)，Shift+Enter进入下一行(&lt;br/&gt;)</span><br/>
+        		<textarea id="contentArea" name="content"></textarea></br>
+				<label id="tagsLabel">关键词</label> <span class="tips">(别人能更容易地找到这篇文章)</span></br>
+				<input type="text" name="tags" id="tags" /> <span class="tips">若有多个关键词请用逗号或分号隔开，最多5个</span></br>
+				<div id="postBtn">
+    				<input type="submit" class="myBtn" value="立即发表"/>
+    				<input type="button" class="myBtn" value="存为草稿"/>
+				</div>
+        	</form>
+		</div>
+		<!-- /main -->
+
+		<!-- sidebar -->
+		#parse("common/siderBar.vm")
+		<!-- /sidebar -->
+	</div>
+    <!-- content -->
+</div>
+<!-- /content-out -->
+<!-- footer-bottom -->
+#parse("common/footer.vm")
+<!-- /footer-bottom-->
+</body>
+</html>

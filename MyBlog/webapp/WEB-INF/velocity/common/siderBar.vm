@@ -1,0 +1,48 @@
+<div id="sidebar">
+		<!-- 个人信息 -->
+		<div class="about-me">
+			<h3>$!user.userName</h3>
+			<p>
+				<a href="/user/$!{user.userId}.html"><img src="/static/images/avatars/$!{user.avatarUrl}" width="40" height="40" alt="$!user.userName" class="float-left" /></a>
+				$!user.intro
+				<a href="/contact.html">联系我</a>
+			</p>
+		</div>
+		<!-- /个人信息 -->
+		<!-- 归档 -->
+		#if($folderList && $folderList.size()>0)
+		<div class="sidemenu">
+			<h3>归档</h3>
+			<ul>
+				#foreach($folder in $folderList)
+				<li><a href="/blog-folder/${folder.folderId}.html">$folder.folderName</a>($!{folder.blogCount})</li>
+				#end
+			</ul>
+		</div>
+		#end
+		<!-- /归档 -->
+		<!-- 热门 -->
+		<div class="popular">
+			<h3>热门文章</h3>
+			<ul>
+				#foreach($blog in $popularBlogs)
+				<li><a href="/blog/${blog.blogId}.html">$blog.title</a> <span>($!{blog.commentCount}评/$!{blog.clickTimes}阅)</span>
+					<br /><span>$viewUtil.timeFormat($comment.postTime)</span>
+				</li>
+				#end
+			</ul>
+		</div>
+		<!-- /热门 -->
+		<!-- 最新评论 -->
+		<div class="sidemenu">
+			<h3>最新评论</h3>
+			<ul>
+				#foreach($comment in $latestComments)
+				<li>
+					<span>$comment.userName：</span><a href="/blog/$!{comment.blogId}.html#$!{comment.commentId}">$comment.content <br />
+					<span>$viewUtil.timeFormat($comment.postTime)</span></a>
+				</li>
+				#end
+    		</ul>
+		</div>
+</div>

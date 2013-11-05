@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+<title>冰冻小冰的个人博客</title>
+
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="keywords" content="JAVA,C++,网络,编程,代码,博客,WEB,数据库" />
+<meta name="description" content="BingLuo's Blog 我的个人技术博客，编程技术分享！" />
+<meta name="robots" content="index, follow, archive" />
+<meta name="googlebot" content="index, follow, archive" />
+
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
+<link type="text/css" rel="stylesheet" href="/static/css/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="/static/css/shThemeDefault.css"/>
+
+</head>
+
+<body>
+
+<!--header -->
+#parse("common/header.vm")
+<!--/header-->
+<!-- content-outer -->
+<div id="content-wrap" class="clear" >
+	<!-- content -->
+	<div id="content">
+		<div id="navigation"><a href="/">首页</a> &raquo; <span>博文</span></div>
+		<!-- main -->
+		<div id="main">
+			#foreach($blog in $blogList)
+			<div class="post">
+				<div class="right">
+					<h2><a href="/blog/$!{blog.blogId}.html">$blog.title</a></h2>
+					#if($blog.tags && $blog.tags!="")
+					<p class="post-info">Tags:
+						#set($tags = $viewUtil.resolveTags($blog.tags))
+						#set($index = 1)
+						#foreach($tag in $tags)
+						<a href="/tag-blog/$!{tag}.html">$tag</a>#if($index<$tags.size()),#end
+						#set($index = $index+1)
+						#end
+					</p>
+					#end
+					<!--
+					<div class="image-section">
+              			<img src="/static/images/img-post.jpg" alt="image post" height="200" width="500"/>
+         	    	</div>
+					-->
+					<p>
+						$!blog.content
+					</p>
+					<p><a class="more" href="/blog/${blog.blogId}.html">continue reading &raquo;</a></p>
+				</div>
+				<div class="left">
+					#parse("/common/blogBaseLeft.vm")
+				</div>
+			</div>
+			#end
+			<div class="pages">
+				#if($pageNum>$pageCount)#set($pageNum = 1)#end
+				#if(!$pageNum || $pageNum<=0)#set($pageNum=1)#end
+				#set($base = ($pageNum - 3))
+				#if($base<=0)#set($base = 1)#end
+				#set($high = $pageNum+5)
+				#if($high > $pageCount)#set($high = $pageCount)#end
+				<a href="/blogs.html?p=1">|&laquo;</a>&nbsp;
+				#if($base>1)
+				<a href="/blogs.html?p=1"><span>1</span></a>..
+				#end
+				#foreach($i in [$base..$high])
+					#if($i==$pageNum)
+					<span>$i</span>
+					#else
+					<a href="/blogs.html?p=$i"><span>$i</span></a>
+					#end
+				#end
+				#if($high<$pageCount)
+				.. <a href="/blogs.html?p=$pageCount"><span>$pageCount</span></a>
+				#end
+				<a href="/blogs.html?p=$pageCount">&nbsp;&raquo;|</a>
+			</div>
+		</div>
+        <!-- /main -->
+
+		<!-- sidebar -->
+		#parse("common/siderBar.vm")
+		<!-- /sidebar -->
+	</div>
+    <!-- content -->
+</div>
+<!-- /content-out -->
+
+<!-- footer-bottom -->
+#parse("common/footer.vm")
+<!-- /footer-bottom-->
+
+<script type="text/javascript" src="/static/js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="/static/js/brush.js"></script>
+<script type="text/javascript" >
+	$(document).ready(function(){
+		SyntaxHighlighter.config.clipboardSwf = '/static/swf/clipboard.swf';
+		SyntaxHighlighter.all();
+	});
+</script>
+</body>
+</html>

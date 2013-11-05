@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>冰冻小冰的个人博客</title>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<meta name="keywords" content="JAVA,C++,网络,编程,代码,博客,WEB,数据库" />
+<meta name="description" content="BingLuo's Blog 我的个人技术博客，编程技术分享！" />
+<meta name="robots" content="index, follow, archive" />
+<meta name="googlebot" content="index, follow, archive" />
+<link rel="stylesheet" type="text/css" media="screen" href="/static/css/screen.css" />
+</head>
+
+<body>
+
+<!--header -->
+#parse("common/header.vm")
+<!--/header-->
+
+<!-- content-outer -->
+<div id="content-wrap" class="clear" >
+    <!-- content -->
+    <div id="content">
+		<div id="navigation"><a href="/">首页</a> &raquo; <a href="/archives.html">归档</a> &raquo; <span>$archive.folderName</span></div>
+        <!-- main -->
+	    <div id="main">
+            <h2><a href="/">$archive.folderName</a></h2>
+			<div class="navigation clear">
+				<div><a href="#" >&laquo; 前一个归档</a></div>
+				<div><a href="#" >后一个归档 &raquo; </a></div>
+			</div>
+			<ul class="archive">
+				#foreach($blog in $archive.blogList)
+				<li>
+					<div class="post-title"><a href="/blog/$!{blog.blogId}.html">$blog.title</a></div>
+					<div class="post-details">发表于 <a href="#">January 31st, 2010</a> | 标签:
+					#if($blog.tagList && $blog.tagList.size()>0)
+						#set($tags = $blog.tagList)
+						#set($index = 1)
+						#foreach($tag in $tags)
+							<a href="/tag-blog/$!{tag.tagId}.html">$!{tag.tagName}</a>#if($index<$tags.size()),#end
+							#set($index = $index+1)
+						#end
+    				#end
+					</div>
+				</li>
+				#end
+			</ul>
+			<div class="navigation clear">
+				<div><a href="#" >&laquo; 前一个归档</a></div>
+				<div><a href="#" >后一个归档 &raquo; </a></div>
+			</div>
+		</div>
+        <!-- /main -->
+
+		<!-- sidebar -->
+		#parse("common/siderBar.vm")
+		<!-- /sidebar -->
+	</div>
+    <!-- content -->
+</div>
+<!-- /content-out -->
+
+<!-- footer-bottom -->
+#parse("common/footer.vm")
+<!-- /footer-bottom-->
+
+</body>
+</html>

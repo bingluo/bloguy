@@ -1,0 +1,10 @@
+<p class="dateinfo">$!viewUtil.resolveDateGetMonth($blog.postTime)<span>$!viewUtil.resolveDateGetDay($blog.postTime)</span></p>
+<div class="post-meta">
+	<h4></h4>
+	<ul>
+		<li class="user"><a href="#">$!blog.authorName</a></li>
+		<li class="time"><a href="#">$!viewUtil.resolveDateGetTime($blog.postTime)</a></li>
+		<li class="comment"><a href="#">$!{blog.commentCount}评/$!{blog.clickTimes}阅</a></li>
+		<li class="permalink"><a href="/blog/${blog.blogId}.html">静态链接</a></li>
+	</ul>
+</div>
