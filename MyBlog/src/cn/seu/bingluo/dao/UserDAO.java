@@ -3,27 +3,28 @@ package cn.seu.bingluo.dao;
 import cn.seu.bingluo.entity.User;
 
 public interface UserDAO {
+
 	/**
 	 * 根据ID获取用户
 	 * 
 	 * @param userId
 	 * @return
 	 */
-	User selectUserById(long userId);
+	User selectUserById(int userId);
 
 	/**
 	 * 插入用户
 	 * 
 	 * @param user
 	 */
-	long insertUser(User user);
+	int insertUser(User user);
 
 	/**
 	 * 删除用户
 	 * 
 	 * @param userId
 	 */
-	void deleteUserById(long userId);
+	void deleteUserById(int userId);
 
 	/**
 	 * 更新头像

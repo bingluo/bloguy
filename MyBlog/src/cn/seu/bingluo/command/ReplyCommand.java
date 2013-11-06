@@ -1,15 +1,15 @@
 package cn.seu.bingluo.command;
 
 public class ReplyCommand extends BaseCommand {
-	private long blogId;
-	private long toId;
+	private int blogId;
+	private int toId;
 	private String toType;
 	private String content;
 
 	/**
 	 * @return the toId
 	 */
-	public long getToId() {
+	public int getToId() {
 		return toId;
 	}
 
@@ -17,7 +17,7 @@ public class ReplyCommand extends BaseCommand {
 	 * @param toId
 	 *            the toId to set
 	 */
-	public void setToId(long toId) {
+	public void setToId(int toId) {
 		this.toId = toId;
 	}
 
@@ -54,7 +54,7 @@ public class ReplyCommand extends BaseCommand {
 	/**
 	 * @return the blogId
 	 */
-	public long getBlogId() {
+	public int getBlogId() {
 		return blogId;
 	}
 
@@ -62,7 +62,7 @@ public class ReplyCommand extends BaseCommand {
 	 * @param blogId
 	 *            the blogId to set
 	 */
-	public void setBlogId(long blogId) {
+	public void setBlogId(int blogId) {
 		this.blogId = blogId;
 	}
 }

@@ -4,17 +4,17 @@ import java.util.Date;
 
 public class Comment {
 	// 评论ID
-	private long commentId;
+	private int commentId;
 	// 评论作者ID
-	private Long commentUserId;
+	private int commentUserId;
 	// 评论内容
 	private String content;
 	// 被评论的博文Id
-	private long blogId;
+	private int blogId;
 	// 被评论的类型
 	private String toType;
 	// 被评论的ID
-	private long toId;
+	private int toId;
 	// 评论发表时间
 	private Date postTime;
 
@@ -29,14 +29,14 @@ public class Comment {
 	 * @param commentId
 	 *            the commentId to set
 	 */
-	public void setCommentId(long commentId) {
+	public void setCommentId(int commentId) {
 		this.commentId = commentId;
 	}
 
 	/**
 	 * @return the commentUserId
 	 */
-	public Long getCommentUserId() {
+	public int getCommentUserId() {
 		return commentUserId;
 	}
 
@@ -44,7 +44,7 @@ public class Comment {
 	 * @param commentUserId
 	 *            the commentUserId to set
 	 */
-	public void setCommentUserId(Long commentUserId) {
+	public void setCommentUserId(int commentUserId) {
 		this.commentUserId = commentUserId;
 	}
 
@@ -66,7 +66,7 @@ public class Comment {
 	/**
 	 * @return the blogId
 	 */
-	public long getBlogId() {
+	public int getBlogId() {
 		return blogId;
 	}
 
@@ -74,7 +74,7 @@ public class Comment {
 	 * @param blogId
 	 *            the blogId to set
 	 */
-	public void setBlogId(long blogId) {
+	public void setBlogId(int blogId) {
 		this.blogId = blogId;
 	}
 
@@ -96,7 +96,7 @@ public class Comment {
 	/**
 	 * @return the toId
 	 */
-	public long getToId() {
+	public int getToId() {
 		return toId;
 	}
 
@@ -104,7 +104,7 @@ public class Comment {
 	 * @param toId
 	 *            the toId to set
 	 */
-	public void setToId(long toId) {
+	public void setToId(int toId) {
 		this.toId = toId;
 	}
 

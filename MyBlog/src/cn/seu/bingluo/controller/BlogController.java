@@ -73,7 +73,7 @@ public class BlogController {
 	}
 
 	@RequestMapping("/action/xmlrpc/wlwmanifest-{userId}")
-	public void wlwmanifest(@PathVariable("userId") long userId,
+	public void wlwmanifest(@PathVariable("userId") int userId,
 			HttpServletResponse response) {
 		XmlrpcAction xmlrpcAction = new XmlrpcAction();
 		try {
@@ -86,19 +86,19 @@ public class BlogController {
 
 	@RequestMapping("/")
 	public String index(Model model, BaseCommand command) {
-		try {
-			commonIssues(model, command);
-			model.addAttribute("pageType", "index");
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "error404";
-		}
+		// try {
+		// commonIssues(model, command);
+		// model.addAttribute("pageType", "index");
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// return "error404";
+		// }
 		return "index";
 	}
 
-	@RequestMapping("/{user}/blogs.html")
-	public String blogList(BaseCommand command, Model model,
-			HttpServletRequest request) {
+	@RequestMapping("/{userId}/blogs.html")
+	public String blogList(@PathVariable("userId") Integer userId,
+			BaseCommand command, Model model, HttpServletRequest request) {
 		try {
 			String p = request.getParameter("p");
 			int pageNum = 0;
@@ -118,7 +118,7 @@ public class BlogController {
 			model.addAttribute("pageCount",
 					(int) Math.ceil((double) blogCount / 5));
 			model.addAttribute("pageType", "blogs");
-			commonIssues(model, command);
+			commonIssues(model, command, userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error404";
@@ -126,8 +126,9 @@ public class BlogController {
 		return "blogList";
 	}
 
-	@RequestMapping("/blog/{blogId}.html")
-	public String blog(@PathVariable("blogId") String blogId, Model model,
+	@RequestMapping("/{userId}/blog/{blogId}.html")
+	public String blog(@PathVariable("userId") Integer userId,
+			@PathVariable("blogId") String blogId, Model model,
 			BaseCommand command, HttpServletRequest request) {
 		try {
 			long id = Integer.valueOf(blogId);
@@ -147,7 +148,7 @@ public class BlogController {
 			model.addAttribute("blog", blogPojo);
 			model.addAttribute("comments", commentServce.toHtml(commentList));
 			model.addAttribute("pageType", "blogs");
-			commonIssues(model, command);
+			commonIssues(model, command, userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error404";
@@ -155,10 +156,11 @@ public class BlogController {
 		return "blog";
 	}
 
-	@RequestMapping("/archives.html")
-	public String archives(Model model, BaseCommand command) {
+	@RequestMapping("/{userId}/archives.html")
+	public String archives(@PathVariable("userId") Integer userId, Model model,
+			BaseCommand command) {
 		try {
-			commonIssues(model, command);
+			commonIssues(model, command, userId);
 			model.addAttribute("pageType", "archives");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -167,16 +169,17 @@ public class BlogController {
 		return "folderList";
 	}
 
-	@RequestMapping("/blog-folder/{folderId}.html")
-	public String archives(@PathVariable("folderId") String folderId,
-			Model model, BaseCommand command) {
+	@RequestMapping("/{userId}/blog-folder/{folderId}.html")
+	public String archives(@PathVariable("userId") Integer userId,
+			@PathVariable("folderId") String folderId, Model model,
+			BaseCommand command) {
 		try {
-			long id = Integer.valueOf(folderId);
+			int id = Integer.valueOf(folderId);
 			FolderPojo folder = folderService.getFolderById(id);
 			folder.setBlogList(blogService.getBlogsByFolderId(id));
 			model.addAttribute("archive", folder);
 			model.addAttribute("pageType", "archives");
-			commonIssues(model, command);
+			commonIssues(model, command, userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error404";
@@ -184,10 +187,11 @@ public class BlogController {
 		return "archives";
 	}
 
-	@RequestMapping("/tags.html")
-	public String tagList(Model model, BaseCommand command) {
+	@RequestMapping("/{userId}/tags.html")
+	public String tagList(@PathVariable("userId") Integer userId, Model model,
+			BaseCommand command) {
 		try {
-			commonIssues(model, command);
+			commonIssues(model, command, userId);
 			model.addAttribute("pageType", "tags");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -196,17 +200,18 @@ public class BlogController {
 		return "tagList";
 	}
 
-	@RequestMapping("/tag-blog/{tagId}.html")
-	public String tagBlog(@PathVariable("tagId") String tagId, Model model,
+	@RequestMapping("/{userId}/tag-blog/{tagId}.html")
+	public String tagBlog(@PathVariable("userId") Integer userId,
+			@PathVariable("tagId") String tagId, Model model,
 			BaseCommand command) {
 		try {
-			long id = Long.valueOf(tagId);
+			int id = Integer.valueOf(tagId);
 			Tag tag = tagService.getTagById(id);
 			List<BlogPojo> blogList = blogService
 					.getBlogsByTagAndPageNumAndRange(tag.getTagName(), 0, 10);
 			model.addAttribute("blogList", blogList);
 			model.addAttribute("pageType", "tags");
-			commonIssues(model, command);
+			commonIssues(model, command, userId);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "error404";
@@ -214,16 +219,17 @@ public class BlogController {
 		return "blogList";
 	}
 
-	@RequestMapping("/contact.html")
-	public String contactMe(Model model, BaseCommand command) {
+	@RequestMapping("/{userId}/contact.html")
+	public String contactMe(@PathVariable("userId") Integer userId,
+			Model model, BaseCommand command) {
 		model.addAttribute("pageType", "contact");
-		commonIssues(model, command);
+		commonIssues(model, command, userId);
 		return "contactMe";
 	}
 
-	@RequestMapping("/postReply")
-	public String postReply(ReplyCommand command, Model model,
-			HttpServletRequest request) {
+	@RequestMapping("/{userId}/postReply")
+	public String postReply(@PathVariable("userId") Integer userId,
+			ReplyCommand command, Model model, HttpServletRequest request) {
 		try {
 			Comment comment = new CommentPojo();
 			comment.setCommentUserId(command.getBaseUser().getUserId());
@@ -236,15 +242,15 @@ public class BlogController {
 			e.printStackTrace();
 			return "error404";
 		}
-		return blog(String.valueOf(command.getBlogId()), model, command,
-				request);
+		return blog(userId, String.valueOf(command.getBlogId()), model,
+				command, request);
 	}
 
-	private void commonIssues(Model model, BaseCommand command) {
-		List<FolderPojo> folderList = folderService.getAllFolders();
+	private void commonIssues(Model model, BaseCommand command, Integer userId) {
+		List<FolderPojo> folderList = folderService.getAllFolders(userId);
 		List<BlogPojo> popularBlogs = blogService.getPopularBlogs();
 		List<CommentPojo> latestComments = commentServce.getLatestComments();
-		User user = command.getBaseUser();
+		User user = userService.getUserById(userId);
 		User currenUser = command.getBaseUser();
 
 		model.addAttribute("folderList", folderList);

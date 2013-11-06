@@ -39,7 +39,7 @@ public class InitBaseInfoFilter implements Filter {
 		securityContext.setHttpResponse(httpResponse);
 		securityContext.setHttpSession(httpRequest.getSession());
 
-		Long userId = (Long) session.getAttribute("userId");
+		Integer userId = (Integer) session.getAttribute("userId");
 		if (userId != null) {
 			securityContext.setUser(userService.getUserById(userId));
 		}
@@ -54,7 +54,6 @@ public class InitBaseInfoFilter implements Filter {
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
 		// TODO Auto-generated method stub
-
 	}
 
 }

@@ -8,7 +8,7 @@ public class Folder {
 	// 文件夹名
 	private String folderName;
 	// 文件夹用户ID
-	private String folderUserId;
+	private int folderUserId;
 	// 创建时间
 	private Date addTime;
 	// 该归档下文章数
@@ -47,7 +47,7 @@ public class Folder {
 	/**
 	 * @return the folderUserId
 	 */
-	public String getFolderUserId() {
+	public int getFolderUserId() {
 		return folderUserId;
 	}
 
@@ -55,7 +55,7 @@ public class Folder {
 	 * @param folderUserId
 	 *            the folderUserId to set
 	 */
-	public void setFolderUserId(String folderUserId) {
+	public void setFolderUserId(int folderUserId) {
 		this.folderUserId = folderUserId;
 	}
 

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class User {
 	// 用户ID
-	private long userId;
+	private int userId;
 	// 用户名
 	private String userName;
 	// 用户登录密码
@@ -18,11 +18,11 @@ public class User {
 	// 用户更新时间
 	private Date updateTime;
 
-	public long getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
-	public void setUserId(long userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 

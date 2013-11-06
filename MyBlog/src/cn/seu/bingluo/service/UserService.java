@@ -21,32 +21,32 @@ public class UserService {
 		SecurityContextHolder.getSecurityContext().setUser(null);
 	}
 
-	public long register(User user) {
+	public int register(User user) {
 		return userDAOImpl.insertUser(user);
 	}
 
-	public void modifyPswd(long userId, String password) {
+	public void modifyPswd(int userId, String password) {
 		User user = new User();
 		user.setUserId(userId);
 		user.setPassword(password);
 		userDAOImpl.updatePassword(user);
 	}
 
-	public void modifyAvatar(long userId, String avatarUrl) {
+	public void modifyAvatar(int userId, String avatarUrl) {
 		User user = new User();
 		user.setUserId(userId);
 		user.setAvatarUrl(avatarUrl);
 		userDAOImpl.updateAvatar(user);
 	}
 
-	public void modifyIntro(long userId, String intro) {
+	public void modifyIntro(int userId, String intro) {
 		User user = new User();
 		user.setUserId(userId);
 		user.setIntro(intro);
 		userDAOImpl.updateIntro(user);
 	}
 
-	public User getUserById(long userId) {
+	public User getUserById(int userId) {
 		return userDAOImpl.selectUserById(userId);
 	}
 }

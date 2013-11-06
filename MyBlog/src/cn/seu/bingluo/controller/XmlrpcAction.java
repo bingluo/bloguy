@@ -175,7 +175,8 @@ public class XmlrpcAction {
 		blog.setTags((String) post.get("tags"));
 		HashMap source = (HashMap) post.get("source");
 		Object[] categories = (Object[]) post.get("categories");
-		List<FolderPojo> folders = folderService.getAllFolders();
+		List<FolderPojo> folders = folderService
+				.getAllFolders(user.getUserId());
 		if (categories != null && categories.length > 0) {
 			boolean catalog_find = false;
 			for (FolderPojo folder : folders) {
@@ -296,7 +297,8 @@ public class XmlrpcAction {
 			return loginError();
 		}
 
-		List<FolderPojo> folders = folderService.getAllFolders();
+		List<FolderPojo> folders = folderService
+				.getAllFolders(user.getUserId());
 		HashMap[] results = new HashMap[folders.size()];
 		for (int i = 0; i < folders.size(); i++) {
 			final FolderPojo folder = folders.get(i);
@@ -381,7 +383,7 @@ public class XmlrpcAction {
 			return loginError();
 		}
 		final String name = (String) category.get("name");
-		if (folderService.isExistFolderName(name)) {
+		if (folderService.isExistFolderName(name, user.getUserId())) {
 			return new HashMap<String, Object>() {
 				{
 					put("faultCode", HttpServletResponse.SC_FORBIDDEN);
@@ -392,6 +394,7 @@ public class XmlrpcAction {
 
 		Folder folder = new Folder();
 		folder.setFolderName(name);
+		folder.setFolderUserId(user.getUserId());
 		return folderService.createFolder(folder);
 	}
 
@@ -448,7 +451,7 @@ public class XmlrpcAction {
 	 */
 	public void rsd(long userId, HttpServletResponse response)
 			throws IOException {
-		final User user = userService.getUserById(userId);
+		final User user = userService.getUserById((int) userId);
 		if (user == null) {
 			return;
 		}
@@ -478,7 +481,7 @@ public class XmlrpcAction {
 	 */
 	public void wlwmanifest(long userId, HttpServletResponse response)
 			throws IOException {
-		final User user = userService.getUserById(userId);
+		final User user = userService.getUserById((int) userId);
 		if (user == null) {
 			return;
 		}

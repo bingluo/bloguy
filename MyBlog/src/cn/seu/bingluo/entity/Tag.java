@@ -3,16 +3,16 @@ package cn.seu.bingluo.entity;
 import java.util.Date;
 
 public class Tag {
-	private long tagId;
+	private int tagId;
 	private String tagName;
-	private long blogCount;
+	private int blogCount;
 	private Date addTime;
 	private Date updateTime;
 
 	/**
 	 * @return the tagId
 	 */
-	public long getTagId() {
+	public int getTagId() {
 		return tagId;
 	}
 
@@ -20,7 +20,7 @@ public class Tag {
 	 * @param tagId
 	 *            the tagId to set
 	 */
-	public void setTagId(long tagId) {
+	public void setTagId(int tagId) {
 		this.tagId = tagId;
 	}
 
@@ -50,7 +50,7 @@ public class Tag {
 	 * @param blogCount
 	 *            the blogCount to set
 	 */
-	public void setBlogCount(long blogCount) {
+	public void setBlogCount(int blogCount) {
 		this.blogCount = blogCount;
 	}
 

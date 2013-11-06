@@ -20,19 +20,19 @@ public class UserDAOImpl extends SqlMapClientDaoSupport implements UserDAO {
 	}
 
 	@Override
-	public User selectUserById(long userId) {
+	public User selectUserById(int userId) {
 		return (User) getSqlMapClientTemplate().queryForObject(
 				"USERS.selectUserById", userId);
 	}
 
 	@Override
-	public long insertUser(User user) {
-		return (Long) getSqlMapClientTemplate()
-				.insert("USERS.insertUser", user);
+	public int insertUser(User user) {
+		return (Integer) getSqlMapClientTemplate().insert("USERS.insertUser",
+				user);
 	}
 
 	@Override
-	public void deleteUserById(long userId) {
+	public void deleteUserById(int userId) {
 		getSqlMapClientTemplate().delete("USERS.deleteUserById", userId);
 	}
 

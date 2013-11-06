@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Blog {
 	// 博客ID
-	private long blogId;
+	private int blogId;
 	// 标题
 	private String title;
 	// 内容
@@ -12,11 +12,11 @@ public class Blog {
 	// 上传日期
 	private Date postTime;
 	// 作者ID
-	private long authorId;
+	private int authorId;
 	// 博客tags
 	private String tags = "";
 	// 文章属于哪个文件夹（归档）
-	private long folderId;
+	private int folderId;
 	// 评论量
 	private int commentCount;
 	// 浏览量
@@ -27,7 +27,7 @@ public class Blog {
 	/**
 	 * @return the blogId
 	 */
-	public long getBlogId() {
+	public int getBlogId() {
 		return blogId;
 	}
 
@@ -35,7 +35,7 @@ public class Blog {
 	 * @param blogId
 	 *            the blogId to set
 	 */
-	public void setBlogId(long blogId) {
+	public void setBlogId(int blogId) {
 		this.blogId = blogId;
 	}
 
@@ -87,7 +87,7 @@ public class Blog {
 	/**
 	 * @return the authorId
 	 */
-	public long getAuthorId() {
+	public int getAuthorId() {
 		return authorId;
 	}
 
@@ -95,7 +95,7 @@ public class Blog {
 	 * @param authorId
 	 *            the authorId to set
 	 */
-	public void setAuthorId(long authorId) {
+	public void setAuthorId(int authorId) {
 		this.authorId = authorId;
 	}
 
@@ -117,7 +117,7 @@ public class Blog {
 	/**
 	 * @return the folderId
 	 */
-	public long getFolderId() {
+	public int getFolderId() {
 		return folderId;
 	}
 
@@ -125,7 +125,7 @@ public class Blog {
 	 * @param folderId
 	 *            the folderId to set
 	 */
-	public void setFolderId(long folderId) {
+	public void setFolderId(int folderId) {
 		this.folderId = folderId;
 	}
 
