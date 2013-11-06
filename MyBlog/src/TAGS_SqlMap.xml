@@ -13,7 +13,7 @@
 		<result property="updateTime" column="UPDATE_TIME"/>
 	</resultMap>
 
-	<select id="selectTagById" resultMap="TagResultMap" parameterClass="long">
+	<select id="selectTagById" resultMap="TagResultMap" parameterClass="int">
 		<![CDATA[
 		select TAG_ID,TAG_NAME,BLOG_COUNT,ADD_TIME,UPDATE_TIME
 		from TAGS
@@ -29,11 +29,11 @@
 		]]>
 	</insert>
 
-	<update id="addBlogCount" parameterClass="long">
+	<update id="addBlogCount" parameterClass="int">
 		<![CDATA[
 		update TAGS
 		set BLOG_COUNT = BLOG_COUNT+1,UPDATE_TIME = current_timestamp()
-		where TAG_ID = #long#
+		where TAG_ID = #value#
 		]]>
 	</update>
 	

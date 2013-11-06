@@ -42,7 +42,7 @@ public class Tag {
 	/**
 	 * @return the blogCount
 	 */
-	public long getBlogCount() {
+	public int getBlogCount() {
 		return blogCount;
 	}
 

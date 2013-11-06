@@ -21,7 +21,7 @@ public class Comment {
 	/**
 	 * @return the commentId
 	 */
-	public long getCommentId() {
+	public int getCommentId() {
 		return commentId;
 	}
 

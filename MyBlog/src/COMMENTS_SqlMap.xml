@@ -6,58 +6,58 @@
 	<typeAlias alias="comment" type="cn.seu.bingluo.entity.CommentPojo" />
 	<!-- 定义resultMap,将query结果映射为bean -->
 	<resultMap id="CommentResultMap" class="comment">
-		<result property="commentId" column="COMMENTID"/>
-		<result property="userName" column="USERNAME"/>
-		<result property="commentUserId" column="COMMENTUSERID"/>
+		<result property="commentId" column="COMMENT_ID"/>
+		<result property="userName" column="USER_NAME"/>
+		<result property="commentUserId" column="COMMENT_USER_ID"/>
 		<result property="content" column="CONTENT"/>
 		<result property="blogId" column="BLOG_ID"/>
 		<result property="toType" column="TO_TYPE"/>
-		<result property="toId" column="TOID"/>
-		<result property="postTime" column="POSTTIME"/>
+		<result property="toId" column="TO_ID"/>
+		<result property="postTime" column="POST_TIME"/>
 	</resultMap>
 
 	<select id="selectCommentsByBlogIdAndBaseAndRank" resultMap="CommentResultMap" parameterClass="java.util.Map">
 		<![CDATA[
 		SELECT * FROM(
-			SELECT a.commentId,b.USERNAME,a.commentUserId,a.content,a.BLOG_ID,a.TO_TYPE,a.toId,a.postTime
+			SELECT a.comment_Id,b.USER_NAME,a.comment_User_Id,a.content,a.BLOG_ID,a.TO_TYPE,a.to_Id,a.post_Time
 			FROM comments a,users b
-			WHERE a.toId = #id# AND a.TO_TYPE = '0' AND a.commentUserId = b.userId
-			ORDER BY postTime ASC) c
+			WHERE a.to_Id = #id# AND a.TO_TYPE = '0' AND a.comment_User_Id = b.user_Id
+			ORDER BY post_Time ASC) c
 		limit #base#,#range#
 		]]>
 	</select>
 
-	<select id="selectCommentsByCommentedId" resultMap="CommentResultMap" parameterClass="long">
+	<select id="selectCommentsByCommentedId" resultMap="CommentResultMap" parameterClass="int">
 		<![CDATA[
-		SELECT a.commentId,b.USERNAME,a.commentUserId,a.content,a.BLOG_ID,a.TO_TYPE,a.toId,a.postTime
+		SELECT a.comment_Id,b.USER_NAME,a.comment_User_Id,a.content,a.BLOG_ID,a.TO_TYPE,a.to_Id,a.post_Time
 		FROM comments a,users b
-		WHERE a.toId = #value# AND a.TO_TYPE = '1' AND a.commentUserId = b.userId
-		ORDER BY postTime ASC
+		WHERE a.to_Id = #value# AND a.TO_TYPE = '1' AND a.comment_User_Id = b.user_Id
+		ORDER BY post_Time ASC
 		]]>
 	</select>
 
 	<insert id="insertComment" parameterClass="comment">
 		<![CDATA[
 		INSERT INTO COMMENTS
-		(commentUserId,content,BLOG_ID,TO_TYPE,toId,postTime)
+		(comment_User_Id,content,BLOG_ID,TO_TYPE,to_Id,post_Time)
 		VALUES (#commentUserId#,#content#,#blogId#,#toType#,#toId#,current_timestamp())
 		]]>
 	</insert>
 
-	<delete id="deleteComment" parameterClass="long">
+	<delete id="deleteComment" parameterClass="int">
 		<![CDATA[
 		DELETE FROM COMMENTS
-		WHERE commentId = #value#
+		WHERE comment_Id = #value#
 		]]>
 	</delete>
 
 	<select id="selectLatestComment" resultMap="CommentResultMap">
 		<![CDATA[
 		SELECT * FROM
-			(SELECT a.commentId,b.USERNAME,a.commentUserId,a.content,a.BLOG_ID,a.TO_TYPE,a.toId,a.postTime
+			(SELECT a.comment_Id,b.USER_NAME,a.comment_User_Id,a.content,a.BLOG_ID,a.TO_TYPE,a.to_Id,a.post_Time
 			FROM COMMENTS a,USERS b
-			WHERE a.commentUserId = b.userId
-			ORDER BY a.postTime DESC) c
+			WHERE a.comment_User_Id = b.user_Id
+			ORDER BY a.post_Time DESC) c
 		limit 0,5
 		]]>
 	</select>

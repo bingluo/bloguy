@@ -7,65 +7,65 @@
 	<typeAlias alias="blog" type="cn.seu.bingluo.entity.BlogPojo" />
 	<!-- 定义resultMap,将query结果映射为bean -->
 	<resultMap id="BaseBlogResultMap" class="baseBlog">
-		<result property="blogId" column="BLOGID"/>
+		<result property="blogId" column="BLOG_ID"/>
 		<result property="title" column="TITLE"/>
 		<result property="content" column="CONTENT"/>
-		<result property="postTime" column="POSTTIME"/>
-		<result property="authorId" column="AUTHORID"/>
+		<result property="postTime" column="POST_TIME"/>
+		<result property="authorId" column="AUTHOR_ID"/>
 		<result property="tags" column="TAGS" nullValue=""/>
-		<result property="folderId" column="FOLDERID"/>
+		<result property="folderId" column="FOLDER_ID"/>
 		<result property="commentCount" column="COMMENT_COUNT"/>
-		<result property="clickTimes" column="CLICKTIMES"/>
+		<result property="clickTimes" column="CLICK_TIMES"/>
 		<result property="updateTime" column="UPDATE_TIME"/>
 	</resultMap>
 	<resultMap id="BlogResultMap" class="blog">
-		<result property="blogId" column="BLOGID"/>
+		<result property="blogId" column="BLOG_ID"/>
 		<result property="title" column="TITLE"/>
 		<result property="content" column="CONTENT"/>
-		<result property="postTime" column="POSTTIME"/>
-		<result property="authorId" column="AUTHORID"/>
-		<result property="authorName" column="USERNAME"/>
+		<result property="postTime" column="POST_TIME"/>
+		<result property="authorId" column="AUTHOR_ID"/>
+		<result property="authorName" column="USER_NAME"/>
 		<result property="tags" column="TAGS" nullValue=""/>
-		<result property="folderId" column="FOLDERID"/>
+		<result property="folderId" column="FOLDER_ID"/>
 		<result property="commentCount" column="COMMENT_COUNT"/>
-		<result property="clickTimes" column="CLICKTIMES"/>
+		<result property="clickTimes" column="CLICK_TIMES"/>
 		<result property="updateTime" column="UPDATE_TIME"/>
 	</resultMap>
 
 	<select id="selectBlogsByBaseAndRange" resultMap="BlogResultMap" parameterClass="java.util.Map">
 		<![CDATA[
 		SELECT * FROM
-			(SELECT a.blogId,a.title,a.content,a.postTime,b.userName,a.authorId,a.tags,a.folderId,a.COMMENT_COUNT,a.clickTimes,a.UPDATE_TIME
+			(SELECT a.blog_id,a.title,a.content,a.post_time,b.user_name,a.author_id,a.tags,a.folder_id,a.COMMENT_COUNT,a.click_times,a.UPDATE_TIME
 			 FROM BLOGS a,USERS b
-			 WHERE a.authorId = b.userId
-			 ORDER BY a.postTime DESC) c
+			 WHERE a.author_id = b.user_id
+			 ORDER BY a.post_time DESC) c
 		limit #base#,#range#
 		]]>
 	</select>
 
-	<select id="selectBlogsByFolderId" resultMap="BlogResultMap" parameterClass="long">
+	<select id="selectBlogsByFolderId" resultMap="BlogResultMap" parameterClass="int">
 		<![CDATA[
-		SELECT a.blogId,a.title,a.content,a.postTime,b.userName,a.authorId,a.tags,a.folderId,a.COMMENT_COUNT,a.clickTimes,a.UPDATE_TIME
+		SELECT a.blog_id,a.title,a.content,a.post_time,b.user_name,a.author_id,a.tags,a.folder_id,a.COMMENT_COUNT,a.click_times,a.UPDATE_TIME
 		FROM BLOGS a,USERS b
-		WHERE a.folderId = #folderId# AND a.authorId = b.userId
-		ORDER BY a.postTime DESC
+		WHERE a.folder_id = #folderId# AND a.author_id = b.user_id
+		ORDER BY a.post_time DESC
 		]]>
 	</select>
 
 	<select id="selectBlogsByBaseAndRangeAndTagName" resultMap="BlogResultMap" parameterClass="java.util.Map">
 		<![CDATA[
 		SELECT * FROM
-			(SELECT a.blogId,a.title,a.content,a.postTime,b.userName,a.authorId,a.tags,a.folderId,a.COMMENT_COUNT,a.clickTimes,a.UPDATE_TIME
+			(SELECT a.blog_id,a.title,a.content,a.post_time,b.user_name,a.author_id,a.tags,a.folder_id,a.COMMENT_COUNT,a.click_times,a.UPDATE_TIME
 			 FROM BLOGS a, USERS b
-			 WHERE instr(upper(a.tags), upper(#tagName#))>0 AND a.authorId = b.userId
-			 ORDER BY a.postTime DESC) c
+			 WHERE instr(upper(a.tags), upper(#tagName#))>0 AND a.author_id = b.user_id
+			 ORDER BY a.post_time DESC) c
 		limit #base#,#range#
 		]]>
 	</select>
 
-	<select id="selectBlogsCountByUserId" resultClass="int" parameterClass="long">
+	<select id="selectBlogsCountByUserId" resultClass="int" parameterClass="int">
 		<![CDATA[
-		SELECT count(*) FROM BLOGS WHERE authorId=#value#
+		SELECT count(*) FROM BLOGS WHERE author_id=#value#
 		]]>
 	</select>
 
@@ -75,11 +75,11 @@
 		]]>
 	</select>
 
-	<select id="selectFolderBlogsCount" resultClass="int" parameterClass="long">
+	<select id="selectFolderBlogsCount" resultClass="int" parameterClass="int">
 		<![CDATA[
 		SELECT count(*)
 		FROM BLOGS
-		WHERE folderId = #value#
+		WHERE folder_id = #value#
 		]]>
 	</select>
 
@@ -91,21 +91,21 @@
 		]]>
 	</select>
 
-	<select id="selectBlogById" resultMap="BlogResultMap" parameterClass="long">
+	<select id="selectBlogById" resultMap="BlogResultMap" parameterClass="int">
 		<![CDATA[
-		SELECT a.blogId,a.title,a.content,a.postTime,b.userName,a.authorId,a.tags,a.folderId,a.COMMENT_COUNT,a.clickTimes,a.UPDATE_TIME
+		SELECT a.blog_id,a.title,a.content,a.post_time,b.user_name,a.author_id,a.tags,a.folder_Id,a.COMMENT_COUNT,a.click_Times,a.UPDATE_TIME
 		FROM BLOGS a,USERS b
-		WHERE a.blogId = #value# AND a.authorId = b.userId
+		WHERE a.blog_Id = #value# AND a.author_Id = b.userId
 		]]>
 	</select>
 
 	<insert id="insertBlog" parameterClass="baseBlog">
 		<![CDATA[
 		INSERT INTO BLOGS
-		(title,content,postTime,authorId,tags,folderId,COMMENT_COUNT,clickTimes,UPDATE_TIME)
+		(title,content,post_Time,author_Id,tags,folder_Id,COMMENT_COUNT,click_Times,UPDATE_TIME)
 		VALUES (#title#,#content#,current_timestamp(),#authorId#,#tags#,#folderId#,#commentCount#,#clickTimes#,current_timestamp())
 		]]>
-		<selectKey resultClass="long" keyProperty="blogId">
+		<selectKey resultClass="int" keyProperty="blogId">
 			select last_insert_id() as ID from BLOGS limit 1
 		</selectKey>
 	</insert>
@@ -116,34 +116,34 @@
 		SET	title = #title#,
 			content = #content#,
 			tags = #tags#,
-			folderId = #folderId#,
+			folder_Id = #folderId#,
 			UPDATE_TIME = current_timestamp()
-		WHERE blogId = #blogId#
+		WHERE blog_Id = #blogId#
 		]]>
 	</update>
 
-	<update id="addClickTime" parameterClass="long">
+	<update id="addClickTime" parameterClass="int">
 		<![CDATA[
 		UPDATE BLOGS
-		SET	clickTimes = clickTimes+1
-		WHERE blogId = #value#
+		SET	click_Times = clickTimes+1
+		WHERE blog_Id = #value#
 		]]>
 	</update>
 
 	<select id="selectHotBlogs" resultMap="BlogResultMap">
 		<![CDATA[
 		SELECT * FROM(
-			SELECT a.blogId,a.title,a.content,a.postTime,b.userName,a.authorId,a.tags,a.folderId,a.COMMENT_COUNT,a.clickTimes,a.UPDATE_TIME
+			SELECT a.blog_Id,a.title,a.content,a.post_Time,b.user_Name,a.author_Id,a.tags,a.folder_Id,a.COMMENT_COUNT,a.click_Times,a.UPDATE_TIME
 			FROM BLOGS a,USERS b
-			WHERE a.authorId = b.userId
+			WHERE a.author_Id = b.user_Id
 			ORDER BY a.COMMENT_COUNT DESC) c
 		limit 0,5
 		]]>
 	</select>
 	
-	<delete id="deleteBlogById" parameterClass="long">
+	<delete id="deleteBlogById" parameterClass="int">
 		<![CDATA[
-		delete from BLOGS where BLOGID = #value#
+		delete from BLOGS where BLOG_ID = #value#
 		]]>
 	</delete>
 </sqlMap>
