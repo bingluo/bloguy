@@ -41,6 +41,13 @@ public interface UserDAO {
 	void updateIntro(User user);
 
 	/**
+	 * 更新邮箱
+	 * 
+	 * @param user
+	 */
+	void updateEmail(User user);
+
+	/**
 	 * 更新密码
 	 * 
 	 * @param user

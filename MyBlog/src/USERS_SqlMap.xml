@@ -11,6 +11,7 @@
 		<result property="password" column="PASSWORD"/>
 		<result property="avatarUrl" column="AVATAR_URL"/>
 		<result property="intro" column="INTRO"/>
+		<result property="email" column="EMAIL"/>
 		<result property="addTime" column="ADD_TIME"/>
 		<result property="updateTime" column="UPDATE_TIME"/>
 	</resultMap>
@@ -18,7 +19,7 @@
 	<!-- 根据ID获取供应商 -->
 	<select id="selectUserById" resultMap="UserResultMap" parameterClass="int">
 		<![CDATA[
-		SELECT user_Id,user_Name,password,avatar_Url,intro,ADD_TIME,UPDATE_TIME
+		SELECT user_Id,user_Name,password,avatar_Url,intro,email,ADD_TIME,UPDATE_TIME
 		FROM USERS
 		WHERE user_Id=#value#
 		]]>
@@ -27,8 +28,8 @@
 	<insert id="insertUser" parameterClass="user">
 		<![CDATA[
 		INSERT INTO USERS
-		(user_Name,password,avatar_Url,intro,ADD_TIME,UPDATE_TIME)
-		values (#userName#,#password#,#avatarUrl#,#intro#,current_timestamp(),current_timestamp())
+		(user_Name,password,avatar_Url,intro,email,ADD_TIME,UPDATE_TIME)
+		values (#userName#,#password#,#avatarUrl#,#intro#,#email#,current_timestamp(),current_timestamp())
 		]]>
 		<selectKey resultClass="int" keyProperty="userId" >
 			select last_insert_id() as id from USERS limit 1
@@ -56,6 +57,14 @@
 		SET intro = #intro#,UPDATE_TIME = current_timestamp()
 		WHERE user_Id = #userId#
 		]]>
+	</update>	
+	
+	<update id="updateEmail" parameterClass="user">
+		<![CDATA[
+		UPDATE USERS
+		SET email = #email#,UPDATE_TIME = current_timestamp()
+		WHERE user_Id = #userId#
+		]]>
 	</update>
 
 	<update id="updatePassword" parameterClass="user">
@@ -68,7 +77,7 @@
 
 	<select id="selectUserByNameAndPswd" parameterClass="java.util.Map" resultMap="UserResultMap">
 		<![CDATA[
-		SELECT user_Id,user_Name,password,avatar_Url,intro,ADD_TIME,UPDATE_TIME
+		SELECT user_Id,user_Name,password,avatar_Url,intro,email,ADD_TIME,UPDATE_TIME
 		FROM USERS
 		WHERE user_Name=#userName# AND password = #password#
 		]]>

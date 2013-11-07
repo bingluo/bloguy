@@ -11,7 +11,7 @@ import javax.mail.internet.MimeMessage;
 
 public class MailIssue {
 
-	public static void send(String str_title, String str_content) {
+	public static void send(String title, String content, String toAddress) {
 		try {
 			// 建立邮件会话
 			Properties props = new Properties(); // 用来在一个文件中存储键-值对的，其中键和值是用等号分隔的，
@@ -31,14 +31,13 @@ public class MailIssue {
 			// 设置发件人的地址
 			message.setFrom(from);
 			// 设置收件人,并设置其接收类型为TO
-			InternetAddress to = new InternetAddress(
-					Constant.personalMailAddress);
+			InternetAddress to = new InternetAddress(toAddress);
 			message.setRecipient(Message.RecipientType.TO, to);
 
 			// 设置标题
-			message.setSubject(str_title);
+			message.setSubject(title);
 			// 设置信件内容
-			message.setContent(str_content, "text/html;charset=gbk");
+			message.setContent(content, "text/html;charset=gbk");
 			// 设置发信时间
 			message.setSentDate(new Date());
 			// 存储邮件信息

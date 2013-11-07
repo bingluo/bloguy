@@ -47,6 +47,11 @@ public class UserDAOImpl extends SqlMapClientDaoSupport implements UserDAO {
 	}
 
 	@Override
+	public void updateEmail(User user) {
+		getSqlMapClientTemplate().update("USERS.updateEmail", user);
+	}
+
+	@Override
 	public void updatePassword(User user) {
 		getSqlMapClientTemplate().update("USERS.updatePassword", user);
 	}

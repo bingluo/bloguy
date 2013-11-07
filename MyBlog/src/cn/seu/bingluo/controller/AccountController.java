@@ -40,7 +40,7 @@ public class AccountController {
 		User user = userService.logon(username, password);
 		if (user != null) {
 			SecurityContextHolder.getSecurityContext().setUser(user);
-			goTo = "/";
+			goTo = "/" + user.getUserId();
 		} else {
 			goTo = "/logon.html";
 		}

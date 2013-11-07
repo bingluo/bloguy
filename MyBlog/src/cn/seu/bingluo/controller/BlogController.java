@@ -52,16 +52,14 @@ public class BlogController {
 		try {
 			xmlrpcAction.index(request, response);
 		} catch (ServletException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	@RequestMapping("/action/xmlrpc/rsd-{userId}")
-	public void rsd(@PathVariable("userId") long userId,
+	public void rsd(@PathVariable("userId") int userId,
 			HttpServletResponse response) {
 		XmlrpcAction xmlrpcAction = new XmlrpcAction();
 		try {
@@ -84,7 +82,7 @@ public class BlogController {
 		}
 	}
 
-	@RequestMapping("/")
+	@RequestMapping(value = { "/{userId}", "/{userId}/" })
 	public String index(Model model, BaseCommand command) {
 		// try {
 		// commonIssues(model, command);

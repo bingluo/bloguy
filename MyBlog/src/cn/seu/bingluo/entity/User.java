@@ -13,6 +13,8 @@ public class User {
 	private String avatarUrl;
 	// 用户简介
 	private String intro;
+	// 用户邮箱
+	private String email;
 	// 用户注册时间
 	private Date addTime;
 	// 用户更新时间
@@ -50,47 +52,34 @@ public class User {
 		this.avatarUrl = avatarUrl;
 	}
 
-	/**
-	 * @return the intro
-	 */
 	public String getIntro() {
 		return intro;
 	}
 
-	/**
-	 * @param intro
-	 *            the intro to set
-	 */
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
 
-	/**
-	 * @return the addTime
-	 */
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public Date getAddTime() {
 		return addTime;
 	}
 
-	/**
-	 * @param addTime
-	 *            the addTime to set
-	 */
 	public void setAddTime(Date addTime) {
 		this.addTime = addTime;
 	}
 
-	/**
-	 * @return the updateTime
-	 */
 	public Date getUpdateTime() {
 		return updateTime;
 	}
 
-	/**
-	 * @param updateTime
-	 *            the updateTime to set
-	 */
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
