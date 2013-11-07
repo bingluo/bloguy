@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : BingLuo's Server
-Source Server Version : 50523
+Source Server         : local
+Source Server Version : 50520
 Source Host           : localhost:3306
-Source Database       : myblog
+Source Database       : bloguy
 
 Target Server Type    : MYSQL
-Target Server Version : 50523
+Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2013-11-06 01:15:52
+Date: 2013-11-07 13:43:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -19,17 +19,17 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `blogs`;
 CREATE TABLE `blogs` (
-  `BLOGID` int(11) NOT NULL AUTO_INCREMENT,
+  `BLOG_ID` int(11) NOT NULL AUTO_INCREMENT,
   `TITLE` varchar(100) NOT NULL,
   `CONTENT` longtext NOT NULL,
-  `POSTTIME` datetime NOT NULL,
-  `AUTHORID` int(11) NOT NULL,
+  `POST_TIME` datetime NOT NULL,
+  `AUTHOR_ID` int(11) NOT NULL,
   `TAGS` varchar(100) DEFAULT '',
-  `FOLDERID` int(11) NOT NULL DEFAULT '0',
+  `FOLDER_ID` int(11) NOT NULL DEFAULT '0',
   `COMMENT_COUNT` int(11) NOT NULL DEFAULT '0' COMMENT '评论数',
-  `CLICKTIMES` int(11) NOT NULL DEFAULT '0',
+  `CLICK_TIMES` int(11) NOT NULL DEFAULT '0',
   `UPDATE_TIME` datetime NOT NULL,
-  PRIMARY KEY (`BLOGID`)
+  PRIMARY KEY (`BLOG_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -59,14 +59,14 @@ INSERT INTO blogs VALUES ('18', 'hello', '<p><em>阿<font color=\"#000000\">斯�
 -- ----------------------------
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
-  `COMMENTID` int(11) NOT NULL AUTO_INCREMENT,
-  `COMMENTUSERID` int(11) NOT NULL,
+  `COMMENT_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `COMMENT_USER_ID` int(11) NOT NULL,
   `CONTENT` longtext NOT NULL,
   `TO_TYPE` varchar(1) NOT NULL DEFAULT '0' COMMENT '0:文章;1:评论',
-  `TOID` int(11) NOT NULL COMMENT '评论的文章（评论）的ID',
-  `POSTTIME` datetime NOT NULL,
+  `TO_ID` int(11) NOT NULL COMMENT '评论的文章（评论）的ID',
+  `POST_TIME` datetime NOT NULL,
   `BLOG_ID` int(11) NOT NULL,
-  PRIMARY KEY (`COMMENTID`)
+  PRIMARY KEY (`COMMENT_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -130,21 +130,22 @@ INSERT INTO tags VALUES ('5', 'IT', '4', '2012-11-21 13:43:35', '2012-11-24 13:4
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `USERID` int(11) NOT NULL AUTO_INCREMENT,
-  `USERNAME` varchar(50) NOT NULL DEFAULT '',
+  `USER_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `USER_NAME` varchar(50) NOT NULL DEFAULT '',
   `PASSWORD` varchar(200) NOT NULL,
   `AVATARURL` varchar(500) DEFAULT 'avatar.jpg',
   `INTRO` varchar(500) DEFAULT '这个人很懒，什么都没留下',
+  `EMAIL` varchar(100) DEFAULT NULL,
   `ADD_TIME` datetime NOT NULL,
   `UPDATE_TIME` datetime NOT NULL,
-  PRIMARY KEY (`USERID`)
+  PRIMARY KEY (`USER_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO users VALUES ('1', 'BingLuo', '2308720', 'avatar.jpg', '我只想说狡辩一下我并不懒。。。“这个人很懒...”这句话貌似已经沿用了十几年了吧？。。。', '2012-11-16 13:43:07', '2012-11-24 13:43:15');
-INSERT INTO users VALUES ('2', 'HEHE', 'HEHE', 'avatar.jpg', '这个人很懒，什么都没留下', '2012-11-30 20:10:50', '2012-11-30 20:10:50');
+INSERT INTO users VALUES ('1', 'BingLuo', '2308720', 'avatar.jpg', '我只想说狡辩一下我并不懒。。。“这个人很懒...”这句话貌似已经沿用了十几年了吧？。。。', null, '2012-11-16 13:43:07', '2012-11-24 13:43:15');
+INSERT INTO users VALUES ('2', 'HEHE', 'HEHE', 'avatar.jpg', '这个人很懒，什么都没留下', null, '2012-11-30 20:10:50', '2012-11-30 20:10:50');
 DELIMITER ;;
 CREATE TRIGGER `trg_insert_blog` AFTER INSERT ON `blogs` FOR EACH ROW BEGIN
 	set @x=NEW.FOLDERID;
